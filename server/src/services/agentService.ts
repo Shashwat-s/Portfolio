@@ -62,9 +62,9 @@ export async function queryAgent(
 
         // Extract sources if available (from data store response)
         // Note: Actual source extraction depends on how the Agent returns citations.
-        // For now, we'll look for match details or specialized metadata if present.
         const sources: string[] = [];
-        if (result?.match?.matchType === 'KNOWLEDGE_SEARCH') {
+        const matchType = result?.match?.matchType as string;
+        if (matchType === 'KNOWLEDGE_SEARCH' || matchType === 'KNOWLEDGE_CONNECTOR') {
             // In a real implementation, we would parse response.queryResult.match.knowledgeAnswers
             // to get citations. For MVP, we'll mark it as a portfolio source.
             sources.push('Portfolio Knowledge Base');
