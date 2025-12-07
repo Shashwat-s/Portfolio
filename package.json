@@ -1,0 +1,27 @@
+{
+    "name": "ai-portfolio",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Interactive AI-powered portfolio website for Shashwat",
+    "workspaces": [
+        "client",
+        "server",
+        "shared"
+    ],
+    "scripts": {
+        "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+        "dev:client": "npm run dev --workspace=client",
+        "dev:server": "npm run dev --workspace=server",
+        "build": "npm run build --workspace=client && npm run build --workspace=server",
+        "build:client": "npm run build --workspace=client",
+        "build:server": "npm run build --workspace=server",
+        "lint": "npm run lint --workspaces --if-present"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "typescript": "^5.3.3"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

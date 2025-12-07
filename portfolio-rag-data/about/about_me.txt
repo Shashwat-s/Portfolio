@@ -1,0 +1,34 @@
+About Me
+========
+
+I am Shashwat, a software developer passionate about building innovative applications. I specialize in full-stack development with expertise in React, Node.js, React Native, and AI/ML integrations. I love creating immersive user experiences and solving complex problems with elegant solutions.
+
+Technical Skills
+================
+Frontend Development:
+- React, React Native, Next.js
+- TypeScript, JavaScript
+- Three.js, React Three Fiber, WebGL
+- TailwindCSS, Framer Motion
+- Vite, Webpack
+
+Backend Development:
+- Node.js, Express.js
+- MongoDB, Firebase (Firestore)
+- REST APIs, WebSocket, Socket.io
+- JWT Authentication
+
+AI/ML Integration:
+- Google Cloud Vertex AI
+- Google Gemini AI
+- Conversational AI agents
+- Voice recognition and synthesis
+
+Mobile Development:
+- React Native, Expo
+- Cross-platform iOS/Android development
+
+Cloud & DevOps:
+- Google Cloud Platform (Cloud Run, Vertex AI)
+- Firebase (Authentication, Storage, Firestore)
+- Vercel, Netlify deployment

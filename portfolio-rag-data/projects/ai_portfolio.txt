@@ -1,0 +1,19 @@
+Project: AI Portfolio (This Website)
+==================================
+
+What it is: An immersive, voice-controlled portfolio website featuring an interactive 3D particle sphere.
+
+Key Features:
+- 12,000+ particles in a galaxy-like formation using Three.js
+- Voice control - navigate and ask questions using natural speech
+- AI conversations powered by Google Conversational Agents
+- Particles respond to mouse movement and pulse when AI speaks
+- Single-canvas architecture with smooth overlay transitions
+
+Technologies Used:
+- Frontend: React, TypeScript, Three.js, React Three Fiber, TailwindCSS, Framer Motion
+- Voice: Web Speech API for speech recognition and synthesis
+- Backend: Node.js, Express, Google Cloud Vertex AI
+- State Management: Zustand
+
+What makes it special: The particle sphere creates an immersive experience where visitors can literally talk to an AI version of me. The particles react to voice and mouse, making it feel alive.

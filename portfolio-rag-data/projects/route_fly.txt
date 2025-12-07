@@ -1,0 +1,24 @@
+Project: Route-Fly - GPX Route Visualization
+==========================================
+
+What it is: A GPX-powered route visualization tool that converts running, cycling, or hiking paths into smooth, cinematic flyover animations and downloadable videos.
+
+Key Features:
+- GPX file upload from any source (Strava, Garmin, etc.)
+- 3D flyover animation with cinematic camera movement
+- High-speed playback adjustable from 50x to 500x
+- HD video recording at 60 FPS, 12 Mbps
+- Multiple export formats: 9:16 (Instagram) or 16:9 (YouTube)
+- Free OpenStreetMap tiles (no API keys required)
+- Tile preloading to prevent black boxes during recording
+- Real-time animation progress indicator
+
+Technologies Used:
+- Frontend: React 18, Vite, TailwindCSS, Maplibre GL (3D maps)
+- Video: MediaRecorder API for built-in recording
+- Backend: Node.js, Express, Multer, gpxparser
+- HTTP: Axios
+
+What makes it special: Turn your outdoor activities into beautiful videos. No paid APIs required - completely free and open-source.
+
+GitHub: https://github.com/Shashwat-s/Route-Fly

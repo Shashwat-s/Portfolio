@@ -1,0 +1,10 @@
+- Typescript with React Classes - Quick Start - Jest Testing (Udemy)
+- React + Redux (Udemy)
+- Artificial Intelligence
+- Google Digital Marketing
+- Python
+
+Technical Skills:
+- Languages: C, C++, Python, JavaScript, HTML, CSS
+- Frameworks/Libraries: React
+- Tools: Microsoft Office, Adobe Photoshop

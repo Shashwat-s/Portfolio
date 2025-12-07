@@ -1,0 +1,24 @@
+Project: AI Wardrobe - Virtual Try-On Application
+===============================================
+
+What it is: An AI-powered application that lets users virtually try on clothes using their photos.
+
+Key Features:
+- User authentication with Firebase (Google Sign-in and Email/Password)
+- Profile management with full-body photo uploads
+- Wardrobe management for organizing topwear and bottomwear
+- AI virtual try-on using advanced VTON technology
+- Mobile-first responsive design
+- Outfit saving and management
+- Real-time preview when selecting clothing items
+
+Technologies Used:
+- Frontend: React 18, Vite, TailwindCSS, React Router
+- Backend: Node.js, Express, Google Gemini AI
+- Database/Storage: Firebase (Firestore, Storage, Authentication)
+- Image Processing: Sharp
+- Deployment: Google Cloud Run ready
+
+What makes it special: Never wonder how clothes will look on you again. Upload your photo and virtually try on any outfit with AI-powered compositing.
+
+GitHub: https://github.com/Shashwat-s/ai-wardrobe

@@ -1,0 +1,13 @@
+Role: Intern
+Company: Mercer Mettl
+Key Responsibilities:
+- Researched Augmented Reality (AR) applications for assessments.
+- Developed AR prototypes using Unity.
+- Created "AR Quiz" - a quiz application using AR in Unity.
+- Worked on a CVS project (Front-end Developer/Tester).
+- Built a Chatbot using Python.
+- Created Dashboard Analytics in Tableau.
+
+Other Responsibilities:
+- Designing team member in college.
+- Campus life member in college.

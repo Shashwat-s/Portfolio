@@ -1,0 +1,24 @@
+Project: Aroh - Rise With People Like You
+========================================
+
+What it is: A social platform for personal growth, combining elements of Instagram, Strava, Discord, Duolingo, and Notion.
+
+Key Features:
+- Fun onboarding completed in under 60 seconds with tap-based selections
+- Social feed with photo, video, text, and voice posts
+- Custom reactions: ✊ Respect, 🔥 Hype, 🚀 Boost, ❤️ Support
+- Groups & Circles with daily check-ins and streaks
+- Project Rooms for goal collaboration with task boards
+- Journeys - visual timelines of personal growth
+- Gamification with streaks, badges, and progress stats
+
+Technologies Used:
+- Mobile: React Native, Expo, Expo Router, Zustand
+- Backend: Node.js, Express.js, MongoDB with Mongoose
+- Real-time: Socket.io
+- Authentication: JWT (JSON Web Tokens)
+- Styling: Custom theme with StyleSheet
+
+What makes it special: Unlike productivity apps, Aroh is a social playground for growth. It makes self-improvement fun and community-driven.
+
+GitHub: https://github.com/Shashwat-s/Aroh
