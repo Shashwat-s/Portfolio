@@ -10,6 +10,49 @@ import { useState, useCallback, useRef, useEffect } from 'react';
  * without changing the component code.
  */
 
+// Define local interfaces for the Web Speech API to avoid global type issues
+interface SpeechRecognition extends EventTarget {
+    continuous: boolean;
+    interimResults: boolean;
+    lang: string;
+    start(): void;
+    stop(): void;
+    abort(): void;
+    onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+    onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+    onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+    onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
+}
+
+interface SpeechRecognitionEvent extends Event {
+    resultIndex: number;
+    results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+    error: string;
+    message: string;
+}
+
+// These interfaces are usually available in lib.dom.d.ts but we define/extend them here to be safe
+interface SpeechRecognitionResultList {
+    length: number;
+    item(index: number): SpeechRecognitionResult;
+    [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+    isFinal: boolean;
+    length: number;
+    item(index: number): SpeechRecognitionAlternative;
+    [index: number]: SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionAlternative {
+    transcript: string;
+    confidence: number;
+}
+
 interface UseSpeechToTextOptions {
     /** Language for recognition (default: 'en-US') */
     language?: string;
@@ -40,11 +83,14 @@ interface UseSpeechToTextReturn {
     resetTranscript: () => void;
 }
 
-// Get the SpeechRecognition API (browser prefixed)
-const SpeechRecognition =
-    typeof window !== 'undefined'
-        ? window.SpeechRecognition || window.webkitSpeechRecognition
-        : null;
+// Helper to get the constructor carefully
+const getSpeechRecognitionConstructor = (): { new(): SpeechRecognition } | null => {
+    if (typeof window === 'undefined') return null;
+
+    // Use type assertion to access prefixed versions
+    const win = window as any;
+    return win.SpeechRecognition || win.webkitSpeechRecognition || null;
+};
 
 export function useSpeechToText(
     options: UseSpeechToTextOptions = {}
@@ -62,18 +108,18 @@ export function useSpeechToText(
     const [error, setError] = useState<string | null>(null);
 
     const recognitionRef = useRef<SpeechRecognition | null>(null);
-
-    const isSupported = SpeechRecognition !== null;
+    const SpeechRecognitionConstructor = getSpeechRecognitionConstructor();
+    const isSupported = !!SpeechRecognitionConstructor;
 
     // Initialize recognition instance
     useEffect(() => {
-        if (!isSupported) {
+        if (!isSupported || !SpeechRecognitionConstructor) {
             console.warn('🎤 Speech recognition is NOT supported in this browser');
             return;
         }
 
         console.log('🎤 Initializing speech recognition...');
-        const recognition = new SpeechRecognition!();
+        const recognition = new SpeechRecognitionConstructor();
         recognition.lang = language;
         recognition.interimResults = interimResults;
         recognition.continuous = continuous;
@@ -126,7 +172,10 @@ export function useSpeechToText(
         recognitionRef.current = recognition;
 
         return () => {
-            recognition.abort();
+            // Check if abort exists before calling it
+            if (recognition.abort) {
+                recognition.abort();
+            }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [language, interimResults, continuous, isSupported]);  // Removed onResult, onError to prevent re-init
@@ -184,10 +233,3 @@ function getErrorMessage(error: string): string {
     return messages[error] || `Speech recognition error: ${error}`;
 }
 
-// TypeScript declarations for Web Speech API
-declare global {
-    interface Window {
-        SpeechRecognition: typeof SpeechRecognition;
-        webkitSpeechRecognition: typeof SpeechRecognition;
-    }
-}

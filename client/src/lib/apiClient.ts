@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { ApiResponse, ChatRequest, ChatResponse } from '@shared/types';
 
 /**

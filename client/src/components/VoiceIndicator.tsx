@@ -24,7 +24,7 @@ export default function VoiceIndicator({
     position = 'bottom-right',
 }: VoiceIndicatorProps) {
     const navigate = useNavigate();
-    const { isListening, isSpeaking, processCommand, setTranscript, setSpeaking } = useAppStore();
+    const { isSpeaking, processCommand, setTranscript, setSpeaking } = useAppStore();
     const { sendMessage } = useChatStore();
 
     const { speak } = useTextToSpeech({
