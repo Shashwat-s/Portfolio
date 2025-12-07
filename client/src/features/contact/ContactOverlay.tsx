@@ -93,8 +93,12 @@ export default function ContactOverlay() {
                     </motion.button>
                     {/* Header */}
                     <motion.div variants={itemVariants} className="text-center mb-8">
-                        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl shadow-lg shadow-cyan-500/20">
-                            👋
+                        <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg shadow-cyan-500/30 ring-4 ring-cyan-400/50">
+                            <img
+                                src="/photos/profile photo.png"
+                                alt="Shashwat Sharma"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-1 drop-shadow-lg">{CONTACT_INFO.name}</h1>
                         <p className="text-cyan-400 font-medium drop-shadow">{CONTACT_INFO.title}</p>
