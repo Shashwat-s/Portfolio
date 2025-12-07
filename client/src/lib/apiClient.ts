@@ -7,7 +7,7 @@ import { ApiResponse, ChatRequest, ChatResponse } from '@shared/types';
  * Uses relative URLs in development (proxied by Vite) and absolute URLs in production.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-r8fa.onrender.com';
 
 /**
  * Make a typed fetch request
