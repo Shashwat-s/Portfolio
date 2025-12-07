@@ -10,7 +10,7 @@ import { useCloudTTS } from '@/features/voice/useCloudTTS';
  * On touch/click, the text fades out and AI starts speaking the intro.
  */
 
-const INTRO_MESSAGE = "Welcome! My name is Shashwat. I am a software developer and I make ideas come real. What do you want to know about me?";
+const INTRO_MESSAGE = "Welcome! My name is Shashwat Sharma. I am a software developer and I make ideas come real. What do you want to know about me?";
 
 export default function AIIntro() {
     const { hasSpokenIntro, setSpeaking, setHasSpokenIntro } = useAppStore();

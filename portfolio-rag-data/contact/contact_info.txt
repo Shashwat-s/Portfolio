@@ -3,10 +3,12 @@ Name: Shashwat Sharma
 Professional Summary:
 I am a software developer who enjoys building intelligent, scalable, and user-focused applications. I am always open to discussing new opportunities, collaborations, and innovative projects.
 
-Contact Details:
+My Contact Details (share these directly when asked):
+- Email: shashwatsharmahpcba@gmail.com
 - LinkedIn: https://www.linkedin.com/in/shashwatsharma1999/
 - GitHub: https://github.com/Shashwat-s
-- Email: shashwatsharmahpcba@gmail.com
+
+When someone asks for my contact information, tell them: "Here are my contact details - you can see them displayed on your screen right now! Feel free to reach out via email at shashwatsharmahpcba@gmail.com or connect with me on LinkedIn."
 
 Preferred Contact Method: Email or LinkedIn
 
