@@ -243,6 +243,31 @@ interface ParticleSphereProps {
     className?: string;
 }
 
+// Responsive camera that adjusts FOV based on aspect ratio
+function ResponsiveCamera() {
+    const { size } = useThree();
+
+    useFrame(({ camera }) => {
+        if (camera instanceof THREE.PerspectiveCamera) {
+            const aspect = size.width / size.height;
+            // On portrait mobile (aspect < 1), increase FOV and move camera back
+            // to show more of the sphere
+            if (aspect < 1) {
+                // Mobile portrait: wider FOV to show full sphere
+                camera.fov = 75 + (1 - aspect) * 20; // 75-95 based on how narrow
+                camera.position.z = 6 + (1 - aspect) * 2; // 6-8 based on narrowness
+            } else {
+                // Desktop/landscape: standard settings
+                camera.fov = 60;
+                camera.position.z = 5;
+            }
+            camera.updateProjectionMatrix();
+        }
+    });
+
+    return null;
+}
+
 export default function ParticleSphere({ className }: ParticleSphereProps) {
     const isSpeaking = useAppStore((state) => state.isSpeaking);
     // Initialize position to center of screen for mobile
@@ -306,6 +331,7 @@ export default function ParticleSphere({ className }: ParticleSphereProps) {
                 gl={{ antialias: true, alpha: false }}
                 dpr={[1, 2]}
             >
+                <ResponsiveCamera />
                 <color attach="background" args={['#0a0a0a']} />
                 <fog attach="fog" args={['#0a0a0a', 3, 10]} />
                 <ParticleCloud
@@ -317,3 +343,4 @@ export default function ParticleSphere({ className }: ParticleSphereProps) {
         </div>
     );
 }
+
