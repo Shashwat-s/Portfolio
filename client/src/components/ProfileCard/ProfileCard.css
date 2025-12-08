@@ -402,7 +402,7 @@
   font-weight: 600;
   margin: 0;
   font-size: min(5svh, 3em);
-  margin: 0;
+  white-space: nowrap;
   background-image: linear-gradient(to bottom, #fff, #6f6fbe);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
@@ -505,16 +505,17 @@
   }
 
   .pc-details {
-    top: 1.5em;
+    top: 0.2em;
   }
 
   .pc-details h3 {
-    font-size: min(3.5svh, 2em);
+    font-size: min(4.5svh, 1.6em);
+    white-space: nowrap;
   }
 
   .pc-details p {
-    font-size: 12px;
-    top: -8px;
+    font-size: 11px;
+    top: -6px;
   }
 
   .pc-user-info {
