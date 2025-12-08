@@ -135,9 +135,9 @@ export default function VoiceController() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="fixed bottom-28 right-6 z-50 max-w-xs px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20"
+                    className="fixed bottom-24 sm:bottom-28 right-4 sm:right-6 z-50 max-w-[280px] sm:max-w-xs px-3 sm:px-4 py-2 sm:py-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20"
                 >
-                    <p className="text-sm text-white/80 italic">"{transcript}"</p>
+                    <p className="text-xs sm:text-sm text-white/80 italic">"{transcript}"</p>
                 </motion.div>
             )}
 
@@ -154,20 +154,20 @@ export default function VoiceController() {
                     }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="fixed bottom-28 right-6 z-50 px-4 py-2 rounded-2xl bg-cyan-500/20 backdrop-blur-lg border border-cyan-400/30 flex items-center gap-2 cursor-pointer hover:bg-cyan-500/30 transition-colors"
+                    className="fixed bottom-24 sm:bottom-28 right-4 sm:right-6 z-50 px-3 sm:px-4 py-2 rounded-2xl bg-cyan-500/20 backdrop-blur-lg border border-cyan-400/30 flex items-center gap-2 cursor-pointer hover:bg-cyan-500/30 transition-colors"
                     title="Click to interrupt and speak"
                 >
                     <div className="flex gap-1">
                         {[...Array(3)].map((_, i) => (
                             <motion.div
                                 key={i}
-                                className="w-1 h-4 bg-cyan-400 rounded-full"
-                                animate={{ height: [16, 24, 16] }}
+                                className="w-1 h-3 sm:h-4 bg-cyan-400 rounded-full"
+                                animate={{ height: [12, 20, 12] }}
                                 transition={{ repeat: Infinity, duration: 0.5, delay: i * 0.1 }}
                             />
                         ))}
                     </div>
-                    <span className="text-sm text-cyan-300">Speaking... <span className="text-cyan-400/60 text-xs">(tap to interrupt)</span></span>
+                    <span className="text-xs sm:text-sm text-cyan-300">Speaking... <span className="text-cyan-400/60 text-[10px] sm:text-xs hidden sm:inline">(tap to interrupt)</span></span>
                 </motion.button>
             )}
 
@@ -177,7 +177,7 @@ export default function VoiceController() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`
-          fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full
+          fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full
           flex items-center justify-center shadow-2xl
           transition-all duration-300
           ${isListening

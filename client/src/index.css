@@ -61,6 +61,7 @@ body {
    ======================================== */
 
 @layer components {
+
   /* Glassmorphism Card */
   .glass-card {
     @apply bg-dark-900/50 backdrop-blur-md border border-dark-700/50 rounded-2xl;
@@ -73,7 +74,7 @@ body {
 
   /* Glow Effect */
   .glow {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(14, 165, 233, 0.3),
       0 0 40px rgba(14, 165, 233, 0.1);
   }
@@ -109,10 +110,13 @@ body {
   }
 
   @keyframes voicePulse {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       opacity: 1;
     }
+
     50% {
       transform: scale(1.1);
       opacity: 0.7;
@@ -138,6 +142,7 @@ body {
       opacity: 0;
       transform: translateY(10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -149,6 +154,7 @@ body {
       opacity: 1;
       transform: translateY(0);
     }
+
     to {
       opacity: 0;
       transform: translateY(-10px);
@@ -173,4 +179,71 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+/* ========================================
+   Mobile Responsiveness Utilities
+   ======================================== */
+
+/* Safe area insets for notched devices (iPhone X+) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 640px) {
+
+  /* Minimum tap target size for mobile */
+  button,
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Hide scrollbars on mobile but keep scrollable */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Prevent text selection on interactive elements */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Smoother touch scrolling */
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile viewport height fix (100vh issue on mobile browsers) */
+.min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100dvh;
 }

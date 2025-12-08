@@ -245,22 +245,20 @@ interface ParticleSphereProps {
 
 export default function ParticleSphere({ className }: ParticleSphereProps) {
     const isSpeaking = useAppStore((state) => state.isSpeaking);
-    const mousePosition = useRef({ x: 0, y: 0 });
+    // Initialize position to center of screen for mobile
+    const mousePosition = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0, y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0 });
     const mouseTrail = useRef<MouseTrail[]>([]);
     const lastTrailTime = useRef(0);
 
-    // Track mouse position and create trail
+    // Track mouse and touch position, create trail
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            mousePosition.current = { x: e.clientX, y: e.clientY };
+        // Update position helper
+        const updatePosition = (x: number, y: number) => {
+            mousePosition.current = { x, y };
 
             const now = performance.now() / 1000;
             if (now - lastTrailTime.current > 0.025) {
-                mouseTrail.current.push({
-                    x: e.clientX,
-                    y: e.clientY,
-                    time: now,
-                });
+                mouseTrail.current.push({ x, y, time: now });
 
                 // Keep recent trail points
                 mouseTrail.current = mouseTrail.current.filter(
@@ -271,8 +269,34 @@ export default function ParticleSphere({ className }: ParticleSphereProps) {
             }
         };
 
+        // Mouse handler
+        const handleMouseMove = (e: MouseEvent) => {
+            updatePosition(e.clientX, e.clientY);
+        };
+
+        // Touch handlers
+        const handleTouchStart = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
+        // Add event listeners
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+        };
     }, []);
 
     return (

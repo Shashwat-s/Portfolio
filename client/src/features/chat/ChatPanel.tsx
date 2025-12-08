@@ -47,7 +47,7 @@ export default function ChatPanel() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`
-          fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full
+          fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full
           flex items-center justify-center shadow-lg
           transition-all duration-300
           ${isPanelOpen
@@ -83,7 +83,7 @@ export default function ChatPanel() {
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         exit={{ opacity: 0, x: -20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed bottom-24 left-6 z-50 w-[350px] sm:w-[400px] max-h-[70vh] glass-card overflow-hidden flex flex-col"
+                        className="fixed bottom-20 sm:bottom-24 left-2 sm:left-6 right-2 sm:right-auto z-50 w-auto sm:w-[350px] md:w-[400px] max-h-[60vh] sm:max-h-[70vh] glass-card overflow-hidden flex flex-col"
                     >
                         {/* Header */}
                         <div className="px-4 py-3 border-b border-dark-700 flex items-center justify-between">
