@@ -1,0 +1,104 @@
+# AI Interview Prep
+
+An AI-powered interview preparation platform with real-time voice interaction, powered by Google Cloud AI.
+
+## Features
+
+- **Mock Interviews**: Practice technical, behavioral, and system design interviews
+- **Voice Interaction**: Real-time speech-to-text and text-to-speech using Google Cloud
+- **DSA Playground**: Solve coding problems with AI feedback and code execution
+- **AI Interviewer**: Gemini-powered interviewer that adapts to your responses
+- **Instant Feedback**: Get detailed performance analysis after each session
+
+## Prerequisites
+
+- **Node.js** 18+ (LTS recommended)
+- **Google Cloud Account** with enabled APIs:
+  - Vertex AI API
+  - Cloud Speech-to-Text API  
+  - Cloud Text-to-Speech API
+- **Judge0** (optional, for code execution in DSA playground)
+
+## Quick Start
+
+### 1. Clone & Install
+
+```bash
+# Backend
+cd ai-interview-backend
+npm install
+cp .env.example .env  # Edit with your credentials
+
+# Frontend
+cd ../ai-interview-frontend
+npm install
+```
+
+### 2. Configure Environment
+
+Edit `ai-interview-backend/.env`:
+
+```bash
+GCP_PROJECT_ID=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=../key/your-service-account.json
+```
+
+### 3. Run Development Servers
+
+```bash
+# Terminal 1 - Backend
+cd ai-interview-backend
+npm run dev
+
+# Terminal 2 - Frontend
+cd ai-interview-frontend
+npm run dev
+```
+
+Open http://localhost:5173
+
+## Project Structure
+
+```
+ai-interview-app/
+├── ai-interview-backend/     # Express + WebSocket server
+│   ├── routes/
+│   │   ├── interview.js      # Interview session APIs
+│   │   ├── gcp.js            # DSA grading
+│   │   ├── tts.js            # Text-to-Speech
+│   │   ├── dsa.js            # DSA code runner
+│   │   └── geminiHelper.js   # Vertex AI integration
+│   └── server.js             # Main server + WebSocket STT
+│
+├── ai-interview-frontend/    # React 19 + Vite
+│   ├── src/
+│   │   ├── pages/            # Home, Setup, Interview, DSA, etc.
+│   │   ├── components/       # UI components
+│   │   ├── context/          # Interview state management
+│   │   ├── hooks/            # useSpeech hook
+│   │   └── services/         # API clients
+│   └── vite.config.js
+│
+└── key/                      # GCP credentials (gitignored)
+```
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/interview/start` | POST | Start new interview session |
+| `/api/interview/respond` | POST | Submit answer, get next question |
+| `/api/interview/feedback` | POST | Get final performance feedback |
+| `/api/tts/speak` | POST | Text-to-speech synthesis |
+| `/api/dsa/run` | POST | Execute code against test cases |
+| `/ws-stt` | WebSocket | Real-time speech-to-text stream |
+
+## Tech Stack
+
+**Backend**: Node.js, Express, WebSocket, Google Cloud AI (Vertex AI, Speech-to-Text, TTS)
+
+**Frontend**: React 19, Vite, Material UI, Monaco Editor, Spline 3D
+
+## License
+
+MIT

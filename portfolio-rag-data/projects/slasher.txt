@@ -1,0 +1,59 @@
+# Slasher
+
+Slasher is an immersive, web-based VR-style rhythm game where you use your hands to slash incoming blocks to the beat. Powered by **MediaPipe** for hand tracking and **Three.js** for 3D visuals, it offers a unique, controller-free gaming experience directly in your browser.
+
+![Slasher Preview](public/preview.png)
+*(Note: Add a screenshot of the game here if available)*
+
+## 🎮 Features
+
+-   **Hand Tracking**: Real-time hand detection using your webcam (no VR headset required).
+-   **Rhythm Gameplay**: Slash blue and pink blocks with your corresponding hands.
+-   **Audio Reactive**: Visuals and lighting pulsate to the music.
+-   **Dynamic Difficulty**: The game creates more challenging patterns and speeds up as you survive longer.
+-   **High Score System**: Track your best runs.
+-   **Immersive Visuals**: Neon aesthetic with post-processing effects.
+
+## 🕹️ Controls
+
+1.  **Start Game**: Press the **Spacebar**.
+2.  **Gameplay**:
+    -   Use your **Left Hand** to control the **Pink Saber**.
+    -   Use your **Right Hand** to control the **Blue Saber**.
+    -   Slash blocks of the matching color to score points.
+    -   Avoid missing blocks to save your lives (Start with **5 Lives**).
+
+## 🛠️ Tech Stack
+
+-   **Frontend Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+-   **3D Graphics**: [Three.js](https://threejs.org/) + [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
+-   **Physics**: [Cannon.js](https://github.com/pmndrs/use-cannon)
+-   **Hand Tracking**: [MediaPipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
+-   **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+-   **Styling**: [TailwindCSS](https://tailwindcss.com/)
+-   **Audio**: [Tone.js](https://tonejs.github.io/)
+
+## 🚀 Installation & Setup
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/your-username/slasher.git
+    cd slasher
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open in Browser**
+    Visit `http://localhost:5173` (or the URL shown in your terminal). Allow camera access when prompted.
+
+## 📝 License
+
+This project is open-source and available under the MIT License.

@@ -2,12 +2,15 @@ import { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/store/appStore';
 import { useCloudTTS } from '@/features/voice/useCloudTTS';
+import ProfileCard from '@/components/ProfileCard';
+import cardImage from '@/photos/card.PNG';
+import codePattern from '@/assets/code-pattern.svg';
 
 /**
  * AIIntro Component
  * 
- * Shows "Touch anywhere" splash with transparent background (sphere visible).
- * On touch/click, the text fades out and AI starts speaking the intro.
+ * Shows a ProfileCard with Shashwat's info and photo.
+ * On touch/click, the card fades out and AI starts speaking the intro.
  */
 
 const INTRO_MESSAGE = "Welcome! My name is Shashwat Sharma. I am a software developer and I make ideas come real. What do you want to know about me?";
@@ -44,54 +47,27 @@ export default function AIIntro() {
                     className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer"
                     style={{ touchAction: 'manipulation' }}
                 >
-                    {/* Content - no background, sphere visible */}
+                    {/* ProfileCard with Shashwat's info */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
-                        className="text-center px-8"
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Subtle glassmorphic card */}
-                        <div className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10">
-                            {/* Animated hand icon */}
-                            <motion.div
-                                animate={{
-                                    scale: [1, 1.1, 1],
-                                    opacity: [0.7, 1, 0.7]
-                                }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 2,
-                                    ease: "easeInOut"
-                                }}
-                                className="text-6xl mb-6"
-                            >
-                                👆
-                            </motion.div>
-
-                            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-3 drop-shadow-lg">
-                                Touch anywhere to begin
-                            </h1>
-
-                            <p className="text-gray-400 text-sm">
-                                Experience my AI-powered portfolio
-                            </p>
-
-                            {/* Pulsing ring animation */}
-                            <motion.div
-                                animate={{
-                                    scale: [1, 1.5, 1],
-                                    opacity: [0.3, 0, 0.3]
-                                }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 2,
-                                    ease: "easeOut"
-                                }}
-                                className="absolute inset-0 rounded-3xl border-2 border-cyan-400/30 pointer-events-none"
-                            />
-                        </div>
+                        <ProfileCard
+                            name="Shashwat Sharma"
+                            title="Software Engineer"
+                            handle="shashwat_sharma"
+                            status="Available"
+                            avatarUrl={cardImage}
+                            iconUrl={codePattern}
+                            showUserInfo={true}
+                            enableTilt={true}
+                            enableMobileTilt={true}
+                            behindGlowColor="rgba(0, 200, 255, 0.5)"
+                            bottomMessage="Touch anywhere to start talking with me"
+                        />
                     </motion.div>
                 </motion.div>
             )}

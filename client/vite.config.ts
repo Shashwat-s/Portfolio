@@ -11,6 +11,8 @@ export default defineConfig({
             '@shared': path.resolve(__dirname, '../shared/src'),
         },
     },
+    // Include uppercase PNG extension as asset
+    assetsInclude: ['**/*.PNG'],
     server: {
         port: 5173,
         proxy: {

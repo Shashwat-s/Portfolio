@@ -102,14 +102,26 @@ export default function VoiceController() {
         setSpeaking(isSpeaking);
     }, [isSpeaking, setSpeaking]);
 
-    // Toggle listening
+    // Toggle listening - stop AI when user clicks mic
     const handleToggle = () => {
         if (isListening) {
             stopListening();
         } else {
+            // Stop AI speaking when user wants to talk
+            if (isSpeaking) {
+                stop();
+            }
             startListening();
         }
     };
+
+    // Auto-stop mic when AI starts speaking (prevent echo)
+    useEffect(() => {
+        if (isSpeaking && isListening) {
+            console.log('🔇 AI speaking - stopping mic to prevent echo');
+            stopListening();
+        }
+    }, [isSpeaking, isListening, stopListening]);
 
     if (!isSupported) {
         return null;
