@@ -53,6 +53,41 @@ function cleanTextForSpeech(text: string): string {
         .trim();
 }
 
+// Global audio unlock state - shared across all instances
+let audioUnlocked = false;
+
+/**
+ * Unlock audio playback on mobile browsers
+ * Must be called from a user gesture (click/touch)
+ */
+function unlockAudio(): void {
+    if (audioUnlocked) return;
+
+    try {
+        // Create a silent audio and play it to unlock the audio context
+        const silentAudio = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYYM/UsJAAAAAAD/+1DEAAAGAAGn9AAAIgAANIAAAARMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7UMQwgAAADSAAAAAAAAANIAAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==');
+        silentAudio.volume = 0.01;
+        silentAudio.play().then(() => {
+            audioUnlocked = true;
+            console.log('🔊 Audio context unlocked for mobile');
+        }).catch(() => {
+            // Ignore - will try again on next interaction
+        });
+    } catch (e) {
+        // Ignore
+    }
+}
+
+// Set up global listeners to unlock audio on first user interaction
+if (typeof window !== 'undefined') {
+    const unlockHandler = () => {
+        unlockAudio();
+    };
+
+    window.addEventListener('touchstart', unlockHandler, { once: true, passive: true });
+    window.addEventListener('click', unlockHandler, { once: true });
+}
+
 export function useCloudTTS(
     options: UseCloudTTSOptions = {}
 ): UseCloudTTSReturn {
@@ -118,7 +153,20 @@ export function useCloudTTS(
             };
 
             // Play the audio
-            await audio.play();
+            try {
+                await audio.play();
+            } catch (playError) {
+                // If play fails (mobile autoplay restriction), try to recover
+                console.warn('🔊 Cloud TTS: Play failed, audio may be blocked by browser:', playError);
+                // Store the audio to play on next user interaction
+                const playOnInteraction = () => {
+                    audio.play().catch(console.error);
+                    window.removeEventListener('touchstart', playOnInteraction);
+                    window.removeEventListener('click', playOnInteraction);
+                };
+                window.addEventListener('touchstart', playOnInteraction, { once: true, passive: true });
+                window.addEventListener('click', playOnInteraction, { once: true });
+            }
         } catch (error) {
             console.error('🔊 Cloud TTS error:', error);
             const errorMessage = error instanceof Error ? error.message : 'TTS failed';
@@ -136,3 +184,4 @@ export function useCloudTTS(
         stop,
     };
 }
+
