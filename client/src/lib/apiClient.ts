@@ -10,39 +10,68 @@ import { ApiResponse, ChatRequest, ChatResponse } from '@shared/types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-r8fa.onrender.com';
 
+// Timeout for API calls (30 seconds to handle Render cold starts)
+const API_TIMEOUT = 30000;
+
 /**
- * Make a typed fetch request
+ * Make a typed fetch request with timeout
  */
 async function fetchApi<T>(
     endpoint: string,
     options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
+    const url = `${API_BASE_URL}${endpoint}`;
+
+    console.log(`📡 API Request: ${options.method || 'GET'} ${url}`);
+    const startTime = Date.now();
+
     try {
-        const url = `${API_BASE_URL}${endpoint}`;
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => {
+            console.warn('⏱️ API timeout - aborting request');
+            controller.abort();
+        }, API_TIMEOUT);
 
         const response = await fetch(url, {
             ...options,
+            signal: controller.signal,
             headers: {
                 'Content-Type': 'application/json',
                 ...options.headers,
             },
         });
 
+        clearTimeout(timeoutId);
+        const elapsed = Date.now() - startTime;
+
         const data = await response.json();
 
         if (!response.ok) {
+            console.error(`❌ API Error (${elapsed}ms):`, data.error || response.statusText);
             return {
                 success: false,
                 error: data.error || `HTTP ${response.status}: ${response.statusText}`,
             };
         }
 
+        console.log(`✅ API Success (${elapsed}ms):`, endpoint);
         return {
             success: true,
             data: data as T,
         };
     } catch (error) {
-        console.error('API request failed:', error);
+        const elapsed = Date.now() - startTime;
+
+        if (error instanceof Error && error.name === 'AbortError') {
+            console.error(`⏱️ API Timeout after ${elapsed}ms:`, endpoint);
+            return {
+                success: false,
+                error: 'Request timed out. The server may be waking up - please try again.',
+            };
+        }
+
+        console.error(`❌ API request failed (${elapsed}ms):`, error);
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Network error',

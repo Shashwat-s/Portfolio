@@ -67,10 +67,20 @@ export default function VoiceController() {
                 }
             } else if (parsed.type === VoiceCommand.ASK_AI) {
                 // Send to AI
-                const response = await sendMessage(parsed.query || finalTranscript);
+                console.log('🤖 Sending to AI:', parsed.query || finalTranscript);
+                try {
+                    const response = await sendMessage(parsed.query || finalTranscript);
+                    console.log('🤖 AI Response:', response);
 
-                if (response?.message) {
-                    speak(response.message);
+                    if (response?.message) {
+                        speak(response.message);
+                    } else {
+                        console.warn('⚠️ No message in AI response');
+                        speak("I'm sorry, I couldn't get a response. Please try again.");
+                    }
+                } catch (error) {
+                    console.error('❌ Error calling AI:', error);
+                    speak("I'm sorry, something went wrong. Please try again.");
                 }
             } else {
                 // Unknown command
