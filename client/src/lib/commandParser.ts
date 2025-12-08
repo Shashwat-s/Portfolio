@@ -15,12 +15,10 @@ const NAVIGATION_PATTERNS: Array<{ patterns: RegExp[]; command: VoiceCommand }> 
     {
         command: VoiceCommand.SHOW_PROJECTS,
         patterns: [
-            /\bprojects?\b/i, // Any mention of "project" or "projects"
             /\b(show|display|view|go to|open|see)\s*(my\s+)?projects?\b/i,
             /\bprojects?\s*(page|section|view)\b/i,
             /\bwhat\s+.*projects\b/i,
             /\btell\s+me\s+about\s+(your|the)?\s*projects?\b/i,
-            /\bwork\s+(you\s+)?(have\s+)?done\b/i, // "work you have done" = projects
         ],
     },
     {
@@ -36,13 +34,11 @@ const NAVIGATION_PATTERNS: Array<{ patterns: RegExp[]; command: VoiceCommand }> 
     {
         command: VoiceCommand.SHOW_EXPERIENCE,
         patterns: [
-            /\b(show|display|view|go to|open|see)\s*(my\s+)?(work\s+)?experience\b/i,
+            /\b(show|display|view|go to|open|see)\s*(my\s+)?experience\b/i,
             /\bexperience\s*(page|section|view)\b/i,
-            /\b(job|career)\s*(history)?\b/i,
-            /\bwork\s+history\b/i, // "work history" specifically
+            /\b(work|job|career)\s*(history|experience)?\b/i,
             /\btell\s+me\s+about\s+(your|the)?\s*(work\s+)?experience\b/i,
             /\bwhere\s+have\s+you\s+worked\b/i,
-            /\bprevious\s+(jobs?|employment)\b/i,
         ],
     },
     {
@@ -58,6 +54,7 @@ const NAVIGATION_PATTERNS: Array<{ patterns: RegExp[]; command: VoiceCommand }> 
         command: VoiceCommand.GO_BACK,
         patterns: [
             /\bgo\s*back\b/i,
+            /\bback\b/i,
             /\breturn\b/i,
             /\bprevious\b/i,
             /\bundo\b/i,
