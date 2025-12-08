@@ -300,7 +300,7 @@ export default function ParticleSphere({ className }: ParticleSphereProps) {
     }, []);
 
     return (
-        <div className={`fixed inset-0 ${className || ''}`} style={{ background: '#0a0a0a' }}>
+        <div className={`fixed inset-0 z-0 ${className || ''}`} style={{ background: '#0a0a0a' }}>
             <Canvas
                 camera={{ position: [0, 0, 5], fov: 60 }}
                 gl={{ antialias: true, alpha: false }}

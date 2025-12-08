@@ -56,7 +56,9 @@
 }
 
 .pc-card {
+  height: 80vh;
   height: 80svh;
+  /* Fallback for older browsers */
   max-height: 540px;
   display: grid;
   aspect-ratio: 0.718;
@@ -70,6 +72,8 @@
   background: rgba(0, 0, 0, 0.9);
   backface-visibility: hidden;
   overflow: hidden;
+  /* Ensure visibility */
+  z-index: 1;
 }
 
 .pc-card:hover,
@@ -495,8 +499,9 @@
 
 @media (max-width: 480px) {
   .pc-card {
-    height: 60svh;
-    max-height: 380px;
+    height: 55vh;
+    height: 55svh;
+    max-height: 340px;
   }
 
   .pc-details {
